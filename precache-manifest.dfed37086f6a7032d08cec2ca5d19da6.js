@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "81a228797aaaedef7f0db366896d9123",
+    "revision": "59c6e1f9228dd706e03f407fced074da",
     "url": "/tesya/index.html"
   },
   {
-    "revision": "987e90334a701c50279e",
+    "revision": "9d0dd3aed75b1be067ac",
     "url": "/tesya/static/css/2.764ccc25.chunk.css"
   },
   {
-    "revision": "9774bdd7f67290e1d5fc",
+    "revision": "85582e617ce8e34f9e72",
     "url": "/tesya/static/css/main.613975e6.chunk.css"
   },
   {
-    "revision": "987e90334a701c50279e",
-    "url": "/tesya/static/js/2.f247d8dd.chunk.js"
+    "revision": "9d0dd3aed75b1be067ac",
+    "url": "/tesya/static/js/2.891cadb8.chunk.js"
   },
   {
-    "revision": "9774bdd7f67290e1d5fc",
-    "url": "/tesya/static/js/main.ff6c9e8c.chunk.js"
+    "revision": "85582e617ce8e34f9e72",
+    "url": "/tesya/static/js/main.22c5e258.chunk.js"
   },
   {
     "revision": "f16e71c7a3a0cdf67e17",

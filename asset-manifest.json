@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/tesya/static/css/main.613975e6.chunk.css",
-    "main.js": "/tesya/static/js/main.ff6c9e8c.chunk.js",
-    "main.js.map": "/tesya/static/js/main.ff6c9e8c.chunk.js.map",
+    "main.js": "/tesya/static/js/main.22c5e258.chunk.js",
+    "main.js.map": "/tesya/static/js/main.22c5e258.chunk.js.map",
     "runtime~main.js": "/tesya/static/js/runtime~main.17b6c3aa.js",
     "runtime~main.js.map": "/tesya/static/js/runtime~main.17b6c3aa.js.map",
     "static/css/2.764ccc25.chunk.css": "/tesya/static/css/2.764ccc25.chunk.css",
-    "static/js/2.f247d8dd.chunk.js": "/tesya/static/js/2.f247d8dd.chunk.js",
-    "static/js/2.f247d8dd.chunk.js.map": "/tesya/static/js/2.f247d8dd.chunk.js.map",
+    "static/js/2.891cadb8.chunk.js": "/tesya/static/js/2.891cadb8.chunk.js",
+    "static/js/2.891cadb8.chunk.js.map": "/tesya/static/js/2.891cadb8.chunk.js.map",
     "index.html": "/tesya/index.html",
-    "precache-manifest.54dd7baa5beedd6b211c2b3b439fdd07.js": "/tesya/precache-manifest.54dd7baa5beedd6b211c2b3b439fdd07.js",
+    "precache-manifest.dfed37086f6a7032d08cec2ca5d19da6.js": "/tesya/precache-manifest.dfed37086f6a7032d08cec2ca5d19da6.js",
     "service-worker.js": "/tesya/service-worker.js",
     "static/css/2.764ccc25.chunk.css.map": "/tesya/static/css/2.764ccc25.chunk.css.map",
     "static/css/main.613975e6.chunk.css.map": "/tesya/static/css/main.613975e6.chunk.css.map"
