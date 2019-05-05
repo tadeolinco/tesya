@@ -1,0 +1,20 @@
+* {
+  font-size: 18px;
+  font-family: monospace !important;
+}
+
+body {
+  padding: 10px;
+}
+
+input {
+  border: 0;
+  border-bottom: 1px solid black;
+  outline: none;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

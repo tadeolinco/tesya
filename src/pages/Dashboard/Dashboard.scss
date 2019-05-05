@@ -1,0 +1,31 @@
+section.dashboard {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 20px);
+
+  .budget-table {
+    width: 100%;
+  }
+
+  .budget-name {
+    color: black;
+  }
+
+  .budget-amount {
+    text-align: right;
+    color: #5e9bea;
+  }
+
+  .budget-extra {
+    text-align: right;
+    color: #b3b3b3;
+
+    &.positive {
+      color: #7ace68;
+    }
+
+    &.negative {
+      color: #db4161;
+    }
+  }
+}
