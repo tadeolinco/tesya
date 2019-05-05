@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import { differenceInDays, endOfMonth, isThisMonth, isToday } from 'date-fns';
+import { getDaysInMonth } from 'date-fns';
 import React, { useContext, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import DBContext from '../../context/DBContext';
@@ -8,41 +8,34 @@ import './Dashboard.scss';
 
 const Dashboard = ({ history }) => {
   const {
-    data: { budgets },
+    data: { budgets, savings },
     totalCash,
     extraBudget,
+    updateData,
   } = useContext(DBContext);
 
-  const { estEOD, estEOM } = useMemo(() => {
-    let estEOD = totalCash;
-    let estEOM = totalCash;
+  const { expenditures } = useMemo(() => {
+    let expenditures = -savings;
     if (budgets) {
-      const daysTillEndOfMonth = differenceInDays(
-        endOfMonth(new Date()),
-        new Date()
-      );
+      const daysInMonth = getDaysInMonth(new Date());
 
       for (const budget of budgets) {
-        for (const transaction of budget.transactions) {
-          const transactionDate = new Date(transaction.createdAt);
-          if (isToday(transactionDate)) {
-            estEOD += transaction.amount;
-          }
-          if (isThisMonth(transactionDate)) {
-            estEOM += transaction.amount;
-          }
-        }
         if (budget.frequency === 'D') {
-          estEOD -= budget.amount;
-          estEOM -= budget.amount * daysTillEndOfMonth;
+          expenditures -= budget.amount;
+          expenditures -= budget.amount * daysInMonth;
         } else {
-          estEOM -= budget.amount;
+          expenditures -= budget.amount;
         }
       }
     }
 
-    return { estEOD, estEOM };
-  }, [budgets, totalCash]);
+    return { expenditures };
+  }, [budgets, savings]);
+
+  function updateSavings() {
+    const newSavings = window.prompt('Savings:');
+    if (newSavings !== null) updateData({ savings: newSavings });
+  }
 
   if (!budgets) return null;
 
@@ -100,35 +93,37 @@ const Dashboard = ({ history }) => {
               ))}
             </tbody>
           </table>
+
+          <table className="budget-table" style={{ marginTop: 20 }}>
+            <tbody>
+              <tr>
+                <td colSpan={2}>
+                  <div
+                    style={{ textDecoration: 'underline' }}
+                    onClick={updateSavings}
+                  >
+                    Savings
+                  </div>
+                </td>
+                <td className="budget-amount">{commafy(savings)}/M</td>
+              </tr>
+            </tbody>
+          </table>
+
           <table style={{ textAlign: 'right', float: 'right', marginTop: 40 }}>
             <tbody>
               <tr>
-                <td>Est. EOD:</td>
+                <td>Expenditures:</td>
                 <td>
                   <span
                     className={classnames('budget-extra', {
-                      positive: estEOD > 0,
-                      negative: estEOD < 0,
+                      positive: expenditures > 0,
+                      negative: expenditures < 0,
                     })}
                     style={{ marginLeft: 10 }}
                   >
-                    {estEOD > 0 && '+'}
-                    {commafy(estEOD)}
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>Est. EOM:</td>
-                <td>
-                  <span
-                    className={classnames('budget-extra', {
-                      positive: estEOM > 0,
-                      negative: estEOM < 0,
-                    })}
-                    style={{ marginLeft: 10 }}
-                  >
-                    {estEOM > 0 && '+'}
-                    {commafy(estEOM)}
+                    {expenditures > 0 && '+'}
+                    {commafy(expenditures)}
                   </span>
                 </td>
               </tr>
