@@ -122,9 +122,64 @@ const Budget = ({ history, match }) => {
   return (
     <section className="add-budget">
       <div className="row" style={{ justifyContent: 'space-between' }}>
-        <h2>Budget</h2>
+        <h2>Budget - {name}</h2>
         <button onClick={() => history.push('/dashboard')}>Back</button>
       </div>
+
+      <h2>Transactions</h2>
+      <div>
+        {!Object.keys(transactions).length && 'None'}
+        {[...Object.keys(transactions)]
+          .sort((a, b) => {
+            a = new Date(a);
+            b = new Date(b);
+            return a > b ? -1 : a < b ? 1 : 0;
+          })
+          .map(date => (
+            <table key={date} style={{ width: '100%', marginBottom: 10 }}>
+              <thead>
+                <tr>
+                  <th colSpan={3}>
+                    {format(new Date(date), 'ddd | MMM D, YYYY')}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {[...transactions[date]]
+                  .sort((a, b) => {
+                    a = new Date(a.createdAt);
+                    b = new Date(b.createdAt);
+                    return a > b ? -1 : a < b ? 1 : 0;
+                  })
+                  .map(transaction => (
+                    <tr
+                      key={transaction._id}
+                      onClick={() => handleDeleteTransaction(transaction)}
+                    >
+                      <td style={{ width: 55, fontSize: '0.75em' }}>
+                        {format(transaction.createdAt, 'HH:mm')}
+                      </td>
+                      <td style={{ fontSize: '0.75em' }}>
+                        {transaction.note || '—'}
+                      </td>
+                      <td
+                        style={{
+                          textAlign: 'right',
+                          padding: '5px 0',
+                          fontSize: '0.75em',
+                        }}
+                      >
+                        {commafy(transaction.amount)}
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          ))}
+      </div>
+
+      <h2 style={{ marginTop: 20 }}>Info</h2>
+
       <form>
         <div className="form-item">
           <label htmlFor="budget-name">Name:</label>
@@ -186,56 +241,6 @@ const Budget = ({ history, match }) => {
         <button type="button" onClick={handleSubmit}>
           Edit
         </button>
-      </div>
-      <h2>Transactions</h2>
-      <div>
-        {[...Object.keys(transactions)]
-          .sort((a, b) => {
-            a = new Date(a);
-            b = new Date(b);
-            return a > b ? -1 : a < b ? 1 : 0;
-          })
-          .map(date => (
-            <table key={date} style={{ width: '100%', marginBottom: 10 }}>
-              <thead>
-                <tr>
-                  <th colSpan={3}>
-                    {format(new Date(date), 'ddd | MMM D, YYYY')}
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {[...transactions[date]]
-                  .sort((a, b) => {
-                    a = new Date(a.createdAt);
-                    b = new Date(b.createdAt);
-                    return a > b ? -1 : a < b ? 1 : 0;
-                  })
-                  .map(transaction => (
-                    <tr
-                      key={transaction._id}
-                      onClick={() => handleDeleteTransaction(transaction)}
-                    >
-                      <td style={{ width: 55, fontSize: '0.75em' }}>
-                        {format(transaction.createdAt, 'HH:mm')}
-                      </td>
-                      <td style={{ fontSize: '0.75em' }}>
-                        {transaction.note || '—'}
-                      </td>
-                      <td
-                        style={{
-                          textAlign: 'right',
-                          padding: '5px 0',
-                          fontSize: '0.75em',
-                        }}
-                      >
-                        {commafy(transaction.amount)}
-                      </td>
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
-          ))}
       </div>
     </section>
   );
